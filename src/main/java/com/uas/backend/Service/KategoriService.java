@@ -23,7 +23,7 @@ public class KategoriService {
             currentKategori.setName(kategori.getName());
             kategori = currentKategori;
         }
-        return kategoriRepository.save(kategori);
+       return kategoriRepository.save(kategori);
     }
 
     public Kategori byId(Long id){

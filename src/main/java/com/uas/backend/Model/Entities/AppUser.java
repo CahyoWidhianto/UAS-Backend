@@ -17,13 +17,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
 @Table(name ="tb_users")
 public class AppUser implements UserDetails {
@@ -40,26 +33,12 @@ public class AppUser implements UserDetails {
     @Enumerated((EnumType.STRING))
     private AppUserRole appUserRole;
 
-    private boolean locked;
-    private boolean enabled;
-
-
-    
-    public AppUser(String fullName, String email, String password, AppUserRole appUserRole, boolean locked,
-            boolean enabled) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.appUserRole = appUserRole;
-        this.locked = locked;
-        this.enabled = enabled;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
        
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
-        return Collections.singletonList(authority);
+        return Collections.singleton(authority);
 
     }
 
@@ -80,7 +59,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return true;
     }
 
     @Override
@@ -90,46 +69,46 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 
 
 
-    // public Long getId() {
-    //     return id;
-    // }
+    public Long getId() {
+        return id;
+    }
 
-    // public void setId(Long id) {
-    //     this.id = id;
-    // }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    // public String getFullName() {
-    //     return fullName;
-    // }
+    public String getFullName() {
+        return fullName;
+    }
 
-    // public void setFullName(String fullName) {
-    //     this.fullName = fullName;
-    // }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-    // public String getEmail() {
-    //     return email;
-    // }
+    public String getEmail() {
+        return email;
+    }
 
-    // public void setEmail(String email) {
-    //     this.email = email;
-    // }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    // public void setPassword(String password) {
-    //     this.password = password;
-    // }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    // public AppUserRole getAppUserRole() {
-    //     return appUserRole;
-    // }
+    public AppUserRole getAppUserRole() {
+        return appUserRole;
+    }
 
-    // public void setAppUserRole(AppUserRole appUserRole) {
-    //     this.appUserRole = appUserRole;
-    // }
+    public void setAppUserRole(AppUserRole appUserRole) {
+        this.appUserRole = appUserRole;
+    }
 
 
 

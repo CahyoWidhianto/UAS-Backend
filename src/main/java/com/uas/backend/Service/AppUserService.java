@@ -11,17 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.uas.backend.Model.Entities.AppUser;
 import com.uas.backend.Model.Repository.AppUserRespository;
-import com.uas.backend.Utils.EmailValidator;
 
-import lombok.AllArgsConstructor;
 
 @Service
 @Transactional
-@AllArgsConstructor
 public class AppUserService implements UserDetailsService {
 
 
-    private EmailValidator emailValidator;
+    
 
     @Autowired
     private AppUserRespository appUserRespository;
@@ -46,10 +43,7 @@ public class AppUserService implements UserDetailsService {
                 String.format("user with email '%s' already exists", user.getEmail()));
         }
 
-        boolean isValidEmail= emailValidator.test(user.getEmail());
-        if(!isValidEmail){
-            throw new IllegalAccessError("email is not valid");
-        }
+       
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
